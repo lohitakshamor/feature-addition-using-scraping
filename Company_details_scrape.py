@@ -21,10 +21,10 @@ from joblib import Parallel, delayed
 # In[6]:
 
 
-class glassdoor_scraping():
+class company_scraping():
     def __init__(self):
-        self.username = 'lohitakshamor@yahoo.com'
-        self.password = 'abcd1234@'
+        self.username = 'email_hidden'
+        self.password = 'xyz'
         self.pg=[64,214,90,13,316,521,41,20,44,23,60,43,71,107,1118,87,46]
         self.sectors=['https://www.glassdoor.co.in/Explore/Top-Construction-Repair-and-Maintenance-Companies_IS.4,39_ISEC10007.htm',
              'https://www.glassdoor.co.in/Explore/Top-Education-Companies_IS.4,13_ISEC10009.htm',
@@ -46,7 +46,7 @@ class glassdoor_scraping():
     
     def login(self):
         self.driver =webdriver.Chrome('/home/lohitaksha/chromedriver')
-        self.driver.get("https://www.glassdoor.co.in/index.htm")
+        self.driver.get("https://www.site_hidden.co.in/index.htm")
         time.sleep(2)
         try:
             self.driver.find_element_by_xpath('/html/body/div[2]/div/div/div/div/div[1]/article/header/nav/div/div/div[4]/div[1]').click()
@@ -120,7 +120,7 @@ class glassdoor_scraping():
             while j<=self.pg[i]-1:
                 j+=1
                 lnks=self.driver.find_elements_by_tag_name("a")
-                Links2=[x.get_attribute('href') for x in lnks if '/Reviews' in x.get_attribute('href') and x.get_attribute('href') !='https://www.glassdoor.co.in/Reviews/index.htm']
+                Links2=[x.get_attribute('href') for x in lnks if '/Reviews' in x.get_attribute('href') and x.get_attribute('href') !='https://www.site_hidden/Reviews/index.htm']
                 com_links.append(Links2)
                 self.driver.find_element_by_xpath('/html/body/article/div/div/div/div/div/div[3]/div/ul/li[7]/button/span').click()
                 time.sleep(1.5)
@@ -131,7 +131,7 @@ class glassdoor_scraping():
 
 
 if __name__ == '__main__':
-    scraping = glassdoor_scraping()
+    scraping = company_scraping()
     scraping.login()
     company_urls = scraping.get_company_urls(self)
     #company_details_array=Parallel(n_jobs=4)(delayed(extract_company_details)(company_url for company_url in company_urls)
